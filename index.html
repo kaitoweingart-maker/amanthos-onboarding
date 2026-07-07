@@ -86,6 +86,48 @@ label.chk input{width:20px;height:20px;margin-top:2px;flex-shrink:0}
   </div>
 </div>
 
+<!-- STEP V: Arbeitsvertrag / Unterlagen -->
+<div class="step" id="sV">
+  <h1 data-i="vTitle"></h1>
+  <p class="lead" data-i="vLead"></p>
+  <div class="selgrid" style="max-width:640px">
+    <div class="sel" id="vYes" onclick="setVertrag(true)"><div class="ico">✅</div><h3 data-i="vYes"></h3><p data-i="vYesDesc"></p></div>
+    <div class="sel" id="vNo" onclick="setVertrag(false)"><div class="ico">📋</div><h3 data-i="vNo"></h3><p data-i="vNoDesc"></p></div>
+  </div>
+
+  <div id="docsArea" style="display:none">
+    <div class="sopbox">
+      <h2 style="margin-top:0" data-i="idTitle"></h2>
+      <p class="hint" data-i="idHint"></p>
+      <input type="file" id="idFile" accept="image/*,.pdf" onchange="checkV()" style="margin:6px 0">
+      <p id="idOk" style="display:none;color:#1c7a34;font-weight:700;font-size:14px">✓</p>
+    </div>
+
+    <div class="sopbox">
+      <h2 style="margin-top:0" data-i="psbTitle"></h2>
+      <p class="hint" data-i="psbHint"></p>
+      <div class="selgrid" style="margin:12px 0">
+        <div class="sel" id="modeForm" onclick="setPsbMode('form')"><div class="ico">🌐</div><h3 data-i="psbModeForm"></h3><p data-i="psbModeFormDesc"></p></div>
+        <div class="sel" id="modePdf" onclick="setPsbMode('pdf')"><div class="ico">📄</div><h3 data-i="psbModePdf"></h3><p data-i="psbModePdfDesc"></p></div>
+      </div>
+      <div id="psbForm" style="display:none"></div>
+      <div id="psbPdf" style="display:none">
+        <a class="btn" style="font-size:15px;padding:12px 20px" href="docs/Personalstammblatt.pdf" download data-i="psbDownload"></a>
+        <p class="hint" style="margin-top:12px" data-i="psbUploadHint"></p>
+        <input type="file" id="psbFile" accept=".pdf" onchange="checkV()">
+      </div>
+    </div>
+
+    <div class="sopbox" style="border-top:4px solid #3c78d8">
+      <h2 style="margin-top:0" data-i="bicTitle"></h2>
+      <p class="hint" data-i="bicHint"></p>
+      <input type="text" id="bic" oninput="checkV()" placeholder="z. B. UBSWCHZH80A" style="max-width:340px">
+    </div>
+  </div>
+
+  <div class="nav"><span></span><button class="btn" id="nextV" disabled onclick="go(1)" data-i="next"></button></div>
+</div>
+
 <!-- STEP 1: Unternehmen -->
 <div class="step" id="s1">
   <h1 data-i="welcomeTitle"></h1>
@@ -191,7 +233,22 @@ de: {next:"Weiter →", back:"← Zurück",
  equipTitle:"📦 Das erhältst du von uns",
  equipItems:["👕 <b>T-Shirts</b>","👔 <b>Arbeitshemden</b>","🗝️ <b>Master Key</b>","⏱ <b>Time Badge</b> (Zeiterfassung)"],
  equipNoBadge:"⚠️ Am Standort Brigels gibt es <b>keinen Time Badge</b> – die Zeiterfassung regelt deine Leitung vor Ort.",
- equipNote:"Die Ausstattung bleibt Eigentum von Amanthos und wird beim Austritt vollständig zurückgegeben. Verlust (insbesondere des Master Keys) sofort melden."},
+ equipNote:"Die Ausstattung bleibt Eigentum von Amanthos und wird beim Austritt vollständig zurückgegeben. Verlust (insbesondere des Master Keys) sofort melden.",
+ vTitle:"Dein Arbeitsvertrag.",
+ vLead:"Bevor wir starten: Hast du deinen Arbeitsvertrag von Amanthos bereits erhalten?",
+ vYes:"Ja, Vertrag erhalten", vYesDesc:"Ich habe meinen Arbeitsvertrag bereits.",
+ vNo:"Nein, noch nicht", vNoDesc:"Dann brauchen wir jetzt ein paar Unterlagen von dir.",
+ idTitle:"🪪 1. Gültige ID hochladen",
+ idHint:"Lade ein Foto oder Scan deiner gültigen ID / deines Passes hoch (Vorder- und Rückseite, gut lesbar).",
+ psbTitle:"📋 2. Personalstammblatt",
+ psbHint:"Wir brauchen deine Personalien für Lohn und Versicherungen. Wähle, wie du es ausfüllen möchtest:",
+ psbModeForm:"Im Browser ausfüllen", psbModeFormDesc:"Felder direkt hier ausfüllen – schnellste Variante.",
+ psbModePdf:"PDF herunterladen", psbModePdfDesc:"PDF ausfüllen und ausgefüllt wieder hochladen.",
+ psbDownload:"📄 Personalstammblatt herunterladen",
+ psbUploadHint:"Ausgefülltes PDF hier wieder hochladen:",
+ bicTitle:"🏦 3. BIC / SWIFT deiner Bank",
+ bicHint:"Wichtig: Diese Angabe wird NICHT auf dem Personalstammblatt erfasst – bitte trage sie hier ein (steht auf deiner Bankkarte oder im E-Banking).",
+ psbF:{geschlecht:"Geschlecht",w:"weiblich",m:"männlich",name:"Name",vorname:"Vorname",adresse:"Adresse",plzort:"PLZ / Ort",telefon:"Telefon-Nr. (optional)",mobil:"Mobil-Nr.",email:"E-Mail-Adresse",geburtsdatum:"Geburtsdatum",nationalitaet:"Nationalität",heimatort:"Heimatort",bewilligung:"Aufenthaltsbewilligung (bei Nicht-CH)",keine:"keine / CH-Bürger",ahv:"AHV-/Sozialversicherungs-Nr. (falls vorhanden)",zivilstand:"Zivilstand",ledig:"ledig",verheiratet:"verheiratet",getrennt:"getrennt",geschieden:"geschieden",verwitwet:"verwitwet",partnerschaft:"eingetragene Partnerschaft",kinder:"Kinder (Name, Vorname, Geburtsdatum, m/w – ein Kind pro Zeile, optional)",iban:"IBAN-Nr.",bank:"Name der Bank"}},
 en: {next:"Next →", back:"← Back",
  welcomeTitle:"Welcome to <em>Amanthos</em>.",
  welcomeLead:"Great to have you here! Amanthos is an owner-managed group with hotels and serviced apartments in Switzerland – prize by Radisson in Affoltern am Albis, Hotel Mulin in Brigels and Amanthos Living at Zurich Airport. Before you start, here is what we stand for. Tap the cards:",
@@ -242,7 +299,22 @@ en: {next:"Next →", back:"← Back",
  equipTitle:"📦 What you receive from us",
  equipItems:["👕 <b>T-shirts</b>","👔 <b>Work shirts</b>","🗝️ <b>Master key</b>","⏱ <b>Time badge</b> (time tracking)"],
  equipNoBadge:"⚠️ At the Brigels location there is <b>no time badge</b> – time tracking is handled by your local manager.",
- equipNote:"All equipment remains the property of Amanthos and must be returned in full when you leave. Report any loss (especially the master key) immediately."},
+ equipNote:"All equipment remains the property of Amanthos and must be returned in full when you leave. Report any loss (especially the master key) immediately.",
+ vTitle:"Your employment contract.",
+ vLead:"Before we start: have you already received your employment contract from Amanthos?",
+ vYes:"Yes, contract received", vYesDesc:"I already have my employment contract.",
+ vNo:"No, not yet", vNoDesc:"Then we need a few documents from you now.",
+ idTitle:"🪪 1. Upload a valid ID",
+ idHint:"Upload a photo or scan of your valid ID / passport (front and back, clearly readable).",
+ psbTitle:"📋 2. Personnel data sheet",
+ psbHint:"We need your personal details for payroll and insurance. Choose how you want to fill it in:",
+ psbModeForm:"Fill in browser", psbModeFormDesc:"Fill in the fields right here – fastest option.",
+ psbModePdf:"Download PDF", psbModePdfDesc:"Fill in the PDF and upload it again.",
+ psbDownload:"📄 Download personnel data sheet",
+ psbUploadHint:"Upload the completed PDF here:",
+ bicTitle:"🏦 3. BIC / SWIFT of your bank",
+ bicHint:"Important: this is NOT collected on the personnel data sheet – please enter it here (you find it on your bank card or in e-banking).",
+ psbF:{geschlecht:"Gender",w:"female",m:"male",name:"Last name",vorname:"First name",adresse:"Address",plzort:"ZIP / City",telefon:"Phone (optional)",mobil:"Mobile no.",email:"E-mail address",geburtsdatum:"Date of birth",nationalitaet:"Nationality",heimatort:"Place of origin",bewilligung:"Residence permit (non-Swiss)",keine:"none / Swiss citizen",ahv:"AHV / social security no. (if available)",zivilstand:"Marital status",ledig:"single",verheiratet:"married",getrennt:"separated",geschieden:"divorced",verwitwet:"widowed",partnerschaft:"registered partnership",kinder:"Children (name, first name, date of birth, m/f – one per line, optional)",iban:"IBAN no.",bank:"Name of bank"}},
 pl: {next:"Dalej →", back:"← Wstecz",
  welcomeTitle:"Witamy w <em>Amanthos</em>.",
  welcomeLead:"Cieszymy się, że jesteś! Amanthos to zarządzana przez właścicieli grupa hoteli i apartamentów w Szwajcarii – prize by Radisson w Affoltern am Albis, Hotel Mulin w Brigels i Amanthos Living przy lotnisku w Zurychu. Zanim zaczniesz, zobacz, co jest dla nas ważne. Kliknij karty:",
@@ -293,7 +365,22 @@ pl: {next:"Dalej →", back:"← Wstecz",
  equipTitle:"📦 Co otrzymujesz od nas",
  equipItems:["👕 <b>Koszulki (T-shirty)</b>","👔 <b>Koszule robocze</b>","🗝️ <b>Klucz master</b>","⏱ <b>Time badge</b> (ewidencja czasu pracy)"],
  equipNoBadge:"⚠️ W lokalizacji Brigels <b>nie ma time badge</b> – ewidencję czasu pracy ustala kierownictwo na miejscu.",
- equipNote:"Wyposażenie pozostaje własnością Amanthos i podlega pełnemu zwrotowi przy odejściu. Zgubienie (zwłaszcza klucza master) zgłoś natychmiast."},
+ equipNote:"Wyposażenie pozostaje własnością Amanthos i podlega pełnemu zwrotowi przy odejściu. Zgubienie (zwłaszcza klucza master) zgłoś natychmiast.",
+ vTitle:"Twoja umowa o pracę.",
+ vLead:"Zanim zaczniemy: czy otrzymałeś/-aś już umowę o pracę od Amanthos?",
+ vYes:"Tak, mam umowę", vYesDesc:"Umowę o pracę już otrzymałem/-am.",
+ vNo:"Nie, jeszcze nie", vNoDesc:"W takim razie potrzebujemy teraz kilku dokumentów.",
+ idTitle:"🪪 1. Prześlij ważny dokument tożsamości",
+ idHint:"Prześlij zdjęcie lub skan ważnego dowodu / paszportu (przód i tył, czytelnie).",
+ psbTitle:"📋 2. Karta danych osobowych (Personalstammblatt)",
+ psbHint:"Potrzebujemy Twoich danych do wynagrodzenia i ubezpieczeń. Wybierz, jak chcesz je wypełnić:",
+ psbModeForm:"Wypełnij w przeglądarce", psbModeFormDesc:"Wypełnij pola bezpośrednio tutaj – najszybsza opcja.",
+ psbModePdf:"Pobierz PDF", psbModePdfDesc:"Wypełnij PDF i prześlij go z powrotem.",
+ psbDownload:"📄 Pobierz kartę danych osobowych",
+ psbUploadHint:"Prześlij wypełniony PDF tutaj:",
+ bicTitle:"🏦 3. BIC / SWIFT Twojego banku",
+ bicHint:"Ważne: ta informacja NIE jest zbierana na karcie danych – wpisz ją tutaj (znajdziesz ją na karcie bankowej lub w bankowości elektronicznej).",
+ psbF:{geschlecht:"Płeć",w:"kobieta",m:"mężczyzna",name:"Nazwisko",vorname:"Imię",adresse:"Adres",plzort:"Kod / miejscowość",telefon:"Telefon (opcjonalnie)",mobil:"Nr komórkowy",email:"Adres e-mail",geburtsdatum:"Data urodzenia",nationalitaet:"Narodowość",heimatort:"Miejsce pochodzenia",bewilligung:"Zezwolenie na pobyt (nie-CH)",keine:"brak / obywatel CH",ahv:"Nr AHV / ubezpieczenia (jeśli jest)",zivilstand:"Stan cywilny",ledig:"kawaler/panna",verheiratet:"żonaty/zamężna",getrennt:"w separacji",geschieden:"rozwiedziony/-a",verwitwet:"wdowiec/wdowa",partnerschaft:"zarejestrowany związek",kinder:"Dzieci (nazwisko, imię, data urodzenia, m/k – jedno na linię, opcjonalnie)",iban:"Nr IBAN",bank:"Nazwa banku"}},
 };
 const LOCS = ["prize","mulin","living","chalet"];
 const TOOLS = {
@@ -408,11 +495,71 @@ function checkCommit(){const ok=document.getElementById("name").value.trim().len
  document.getElementById("commitBtn").disabled=!ok;}
 function finish(){const n=document.getElementById("name").value.trim();
  document.getElementById("summary").innerHTML=`<b>${t().sumName}:</b> ${n}<br><b>${t().sumLoc}:</b> ${locName()}<br><b>${t().sumPos}:</b> ${posName()}<br><b>${t().sumDate}:</b> ${new Date().toLocaleDateString()}`;
- const body=encodeURIComponent(t().mailBody(n,locName(),posName()));
+ let extra="";
+ if(vertrag===false){
+   extra+="\n--- Unterlagen (Arbeitsvertrag noch nicht erhalten) ---\n";
+   extra+="BIC/SWIFT: "+document.getElementById("bic").value.trim()+"\n";
+   if(psbMode==="form"){const F=t().psbF;PSB_ALL.forEach(k=>{if((psbVals[k]||"").trim())extra+=F[k]+": "+psbVals[k].trim()+"\n";});}
+   else extra+="Personalstammblatt: als PDF ausgefuellt (siehe Anhang)\n";
+   const idf=document.getElementById("idFile").files[0];
+   extra+="Anhaenge bitte beifuegen: ID ("+(idf?idf.name:"?")+")";
+   if(psbMode==="pdf"){const pf=document.getElementById("psbFile").files[0];extra+=", Personalstammblatt ("+(pf?pf.name:"?")+")";}
+   extra+="\n";
+ } else if(vertrag===true){ extra+="\nArbeitsvertrag: bereits erhalten\n"; }
+ const body=encodeURIComponent(t().mailBody(n,locName(),posName())+extra);
  document.getElementById("mailBtn").href=`mailto:kaito.weingart@amanthos.com?subject=${encodeURIComponent(t().mailSubj+" – "+n)}&body=${body}`;
+ if(vertrag===false){
+   const idf=document.getElementById("idFile").files[0];
+   let att="🪪 "+(idf?idf.name:"ID");
+   if(psbMode==="pdf"){const pf=document.getElementById("psbFile").files[0];att+="<br>📋 "+(pf?pf.name:"Personalstammblatt.pdf");}
+   document.getElementById("summary").innerHTML+=`<hr style="margin:10px 0;border:none;border-top:1px solid var(--line)"><b>📎 ${lang==="de"?"Bitte diese Dateien an die E-Mail anhängen:":lang==="pl"?"Załącz te pliki do e-maila:":"Please attach these files to the e-mail:"}</b><br>${att}`;
+ }
  document.querySelectorAll(".step").forEach(s=>s.classList.remove("on"));document.getElementById("s5").classList.add("on");
  for(let i=1;i<=4;i++)document.getElementById("p"+i).classList.add("done");window.scrollTo({top:0});}
-function chooseLang(l){setLang(l);go(1);}
+function chooseLang(l){setLang(l);showV();}
+let vertrag=null, psbMode=null;
+function showV(){document.querySelectorAll(".step").forEach(s=>s.classList.remove("on"));document.getElementById("sV").classList.add("on");window.scrollTo({top:0});}
+function setVertrag(v){vertrag=v;
+ document.getElementById("vYes").classList.toggle("on",v===true);
+ document.getElementById("vNo").classList.toggle("on",v===false);
+ document.getElementById("docsArea").style.display=v===false?"block":"none";
+ checkV();}
+function setPsbMode(m){psbMode=m;
+ document.getElementById("modeForm").classList.toggle("on",m==="form");
+ document.getElementById("modePdf").classList.toggle("on",m==="pdf");
+ document.getElementById("psbForm").style.display=m==="form"?"block":"none";
+ document.getElementById("psbPdf").style.display=m==="pdf"?"block":"none";
+ if(m==="form")renderPsbForm();
+ checkV();}
+const PSB_REQ=["name","vorname","adresse","plzort","mobil","email","geburtsdatum","nationalitaet","zivilstand","iban","bank"];
+const PSB_ALL=["geschlecht","name","vorname","adresse","plzort","telefon","mobil","email","geburtsdatum","nationalitaet","heimatort","bewilligung","ahv","zivilstand","kinder","iban","bank"];
+let psbVals={};
+function renderPsbForm(){
+ const F=t().psbF, box=document.getElementById("psbForm");
+ function inp(k,el){return el||`<input type="text" data-psb="${k}" value="${(psbVals[k]||"").replace(/"/g,"&quot;")}" oninput="psbVals['${k}']=this.value;checkV()" style="margin:2px 0 10px">`;}
+ let h="";
+ h+=`<label style="font-weight:700;font-size:13px">${F.geschlecht}</label><br><select data-psb="geschlecht" onchange="psbVals['geschlecht']=this.value;checkV()" style="padding:12px;border:1.5px solid var(--line);border-radius:10px;margin:2px 0 10px"><option value=""></option><option ${psbVals.geschlecht===F.w?"selected":""}>${F.w}</option><option ${psbVals.geschlecht===F.m?"selected":""}>${F.m}</option></select><br>`;
+ [["name"],["vorname"],["adresse"],["plzort"],["telefon"],["mobil"],["email"],["geburtsdatum"],["heimatort"],["ahv"]].forEach(([k])=>{h+=`<label style="font-weight:700;font-size:13px">${F[k]}</label>${inp(k)}`;});
+ h+=`<label style="font-weight:700;font-size:13px">${F.nationalitaet}</label>${inp("nationalitaet")}`;
+ h+=`<label style="font-weight:700;font-size:13px">${F.bewilligung}</label><br><select data-psb="bewilligung" onchange="psbVals['bewilligung']=this.value;checkV()" style="padding:12px;border:1.5px solid var(--line);border-radius:10px;margin:2px 0 10px"><option>${F.keine}</option><option>B</option><option>C</option><option>F</option><option>G</option><option>L</option></select><br>`;
+ h+=`<label style="font-weight:700;font-size:13px">${F.zivilstand}</label><br><select data-psb="zivilstand" onchange="psbVals['zivilstand']=this.value;checkV()" style="padding:12px;border:1.5px solid var(--line);border-radius:10px;margin:2px 0 10px"><option value=""></option>`+[F.ledig,F.verheiratet,F.getrennt,F.geschieden,F.verwitwet,F.partnerschaft].map(x=>`<option ${psbVals.zivilstand===x?"selected":""}>${x}</option>`).join("")+`</select><br>`;
+ h+=`<label style="font-weight:700;font-size:13px">${F.kinder}</label><br><textarea data-psb="kinder" oninput="psbVals['kinder']=this.value" style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;height:70px;margin:2px 0 10px">${psbVals.kinder||""}</textarea>`;
+ [["iban"],["bank"]].forEach(([k])=>{h+=`<label style="font-weight:700;font-size:13px">${F[k]}</label>${inp(k)}`;});
+ box.innerHTML=h;
+}
+function psbFormValid(){return PSB_REQ.every(k=>(psbVals[k]||"").trim().length>1);}
+function checkV(){
+ const idOk=document.getElementById("idFile").files.length>0;
+ document.getElementById("idOk").style.display=idOk?"block":"none";
+ let ok=false;
+ if(vertrag===true) ok=true;
+ else if(vertrag===false){
+   const psbOk=psbMode==="form"?psbFormValid():(psbMode==="pdf"&&document.getElementById("psbFile").files.length>0);
+   const bicOk=document.getElementById("bic").value.trim().length>=6;
+   ok=idOk&&psbOk&&bicOk;
+ }
+ document.getElementById("nextV").disabled=!ok;
+}
 renderStatic();
 </script>
 </body>
