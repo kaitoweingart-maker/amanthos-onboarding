@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amanthos Onboarding</title>
+<style>
+:root{--dark:#232d36;--dark2:#2b3540;--red:#c94f4f;--red-deep:#b03a3a;--paper:#f7f6f3;--ink:#1c242b;--muted:#6b7681;--line:#e3e0da}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+header{background:var(--dark);color:#fff;border-bottom:5px solid var(--red);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.mark{font-weight:800;letter-spacing:4px;font-size:20px}
+.langs{display:flex;gap:6px}
+.langs button{background:#3a4650;color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:13px}
+.langs button.on{background:var(--red)}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 80px}
+.progress{display:flex;gap:8px;margin-bottom:28px}
+.progress div{flex:1;height:6px;border-radius:3px;background:#ddd9d2;transition:.3s}
+.progress div.done{background:var(--red)}
+h1{font-size:32px;font-weight:800;line-height:1.2;margin-bottom:10px}
+h1 em{font-style:normal;color:var(--red-deep)}
+p.lead{color:var(--muted);font-size:17px;margin-bottom:24px;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:20px 0}
+.vcard{background:#fff;border:1.5px solid var(--line);border-top:4px solid var(--red);border-radius:12px;padding:20px;cursor:pointer;transition:.2s}
+.vcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.vcard h3{font-size:16px;margin-bottom:6px}
+.vcard p{font-size:14px;color:var(--muted);line-height:1.55;display:none}
+.vcard.open p{display:block}
+.vcard .more{font-size:12px;color:var(--red-deep);font-weight:700;margin-top:6px}
+.vcard.open .more{display:none}
+.hint{font-size:13px;color:var(--muted);margin:6px 0 18px}
+.selgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0 26px}
+.sel{background:#fff;border:2px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;transition:.15s;text-align:center}
+.sel:hover{border-color:#b9c2ca}
+.sel.on{border-color:var(--red);background:#fdf4f4;box-shadow:0 0 0 3px rgba(201,79,79,.15)}
+.sel h3{font-size:16px;margin-bottom:4px}
+.sel p{font-size:13px;color:var(--muted)}
+.sel .ico{font-size:28px;margin-bottom:8px}
+h2{font-size:22px;font-weight:800;margin:26px 0 12px}
+.btn{display:inline-block;background:var(--red-deep);color:#fff;border:none;padding:15px 34px;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer;transition:.15s;text-decoration:none}
+.btn:hover{background:#9c3030}
+.btn:disabled{background:#cfc9c0;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--muted);font-weight:600;padding:15px 18px}
+.nav{display:flex;justify-content:space-between;margin-top:30px;align-items:center}
+.sopbox{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:24px;margin:14px 0}
+.times{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}
+.time{background:var(--dark);color:#fff;border-radius:10px;padding:16px;text-align:center}
+.time.red{background:var(--red-deep)}
+.time b{font-size:26px;display:block}
+.time span{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#c5cdd4}
+ul.rules{margin:10px 0 6px 20px;line-height:1.9;font-size:15px}
+.videobox{background:#eef3fb;border:1.5px solid #b9cdec;border-radius:12px;padding:22px;margin:16px 0}
+.videobox h3{margin-bottom:8px}
+.videobox p{font-size:14.5px;color:#3a4a60;margin-bottom:14px;line-height:1.6}
+.pdfs a{display:inline-block;margin:4px 8px 4px 0;font-size:13.5px;color:var(--red-deep);font-weight:700;text-decoration:none;border:1.5px solid var(--red);border-radius:8px;padding:7px 12px}
+.expect{background:var(--dark);color:#fff;border-radius:14px;padding:26px;margin:18px 0}
+.expect h3{color:var(--red);letter-spacing:2px;text-transform:uppercase;font-size:13px;margin-bottom:10px}
+.expect p{color:#c5cdd4;line-height:1.7;font-size:15.5px}
+input[type=text]{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:10px;font-size:16px;margin:8px 0 14px}
+label.chk{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5;cursor:pointer;margin:10px 0}
+label.chk input{width:20px;height:20px;margin-top:2px;flex-shrink:0}
+.donebox{text-align:center;padding:40px 20px}
+.donebox .big{font-size:56px;margin-bottom:12px}
+.step{display:none}.step.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.summary{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:18px;margin:16px auto;max-width:420px;text-align:left;font-size:15px;line-height:2}
+</style>
+</head>
+<body>
+<header><div class="mark">AMANTHOS</div><div class="langs">
+<button id="l-de" onclick="setLang('de')">DE</button>
+<button id="l-en" onclick="setLang('en')">EN</button>
+<button id="l-pl" onclick="setLang('pl')">PL</button>
+</div></header>
+<div class="wrap">
+<div class="progress"><div id="p1"></div><div id="p2"></div><div id="p3"></div><div id="p4"></div></div>
+
+<!-- STEP 1: Unternehmen -->
+<div class="step on" id="s1">
+  <h1 data-i="welcomeTitle"></h1>
+  <p class="lead" data-i="welcomeLead"></p>
+  <div class="cards" id="valuecards"></div>
+  <p class="hint" data-i="cardsHint"></p>
+  <div class="nav"><span></span><button class="btn" id="next1" onclick="go(2)" data-i="next"></button></div>
+</div>
+
+<!-- STEP 2: Standort & Position -->
+<div class="step" id="s2">
+  <h1 data-i="chooseTitle"></h1>
+  <h2 data-i="chooseLocation"></h2>
+  <div class="selgrid" id="locgrid"></div>
+  <h2 data-i="choosePosition"></h2>
+  <div class="selgrid" id="posgrid"></div>
+  <div class="nav"><button class="btn ghost" onclick="go(1)" data-i="back"></button><button class="btn" id="next2" disabled onclick="renderSop();go(3)" data-i="next"></button></div>
+</div>
+
+<!-- STEP 3: SOP -->
+<div class="step" id="s3">
+  <h1 data-i="sopTitle"></h1>
+  <p class="lead" id="sopIntro"></p>
+  <div id="sopContent"></div>
+  <div class="nav"><button class="btn ghost" onclick="go(2)" data-i="back"></button><button class="btn" onclick="go(4)" data-i="sopRead"></button></div>
+</div>
+
+<!-- STEP 4: Commitment -->
+<div class="step" id="s4">
+  <h1 data-i="commitTitle"></h1>
+  <div class="expect"><h3 data-i="expectKicker"></h3><p data-i="expectText"></p></div>
+  <div class="sopbox">
+    <label style="font-weight:700;font-size:14px" data-i="yourName"></label>
+    <input type="text" id="name" oninput="checkCommit()" placeholder="">
+    <label class="chk"><input type="checkbox" id="agree1" onchange="checkCommit()"><span data-i="agreeSop"></span></label>
+    <label class="chk"><input type="checkbox" id="agree2" onchange="checkCommit()"><span data-i="agreeExpect"></span></label>
+  </div>
+  <div class="nav"><button class="btn ghost" onclick="go(3)" data-i="back"></button><button class="btn" id="commitBtn" disabled onclick="finish()" data-i="commitBtn"></button></div>
+</div>
+
+<!-- STEP 5: Fertig -->
+<div class="step" id="s5">
+  <div class="donebox">
+    <div class="big">🎉</div>
+    <h1 data-i="doneTitle"></h1>
+    <p class="lead" data-i="doneLead"></p>
+    <div class="summary" id="summary"></div>
+    <a class="btn" id="mailBtn" href="#" data-i="doneMail"></a>
+  </div>
+</div>
+</div>
+
+<script>
+const VIDEOS = "https://drive.google.com/drive/folders/1os-XZOoUs50lmWgdjNRbgMSnk58MfkV2";
+const T = {
+de: {next:"Weiter →", back:"← Zurück",
+ welcomeTitle:"Willkommen bei <em>Amanthos</em>.",
+ welcomeLead:"Schön, dass du da bist! Amanthos ist eine eigentümergeführte Gruppe mit Hotels und Serviced Apartments in der Schweiz – prize by Radisson in Affoltern am Albis, Hotel Mulin in Brigels und Amanthos Living am Flughafen Zürich. Bevor du startest, zeigen wir dir, wofür wir stehen. Tippe auf die Karten:",
+ cardsHint:"👆 Tippe alle Karten an, um sie zu lesen.",
+ values:[["🎯","Performance steht im Zentrum","Bei uns zählt das Ergebnis. Wir messen unsere Arbeit – vom sauberen Zimmer bis zur Gästebewertung. Wer Leistung bringt, bekommt Verantwortung und Wertschätzung."],
+  ["💎","Creating Tangible Added Value","Unser Motto: greifbaren Mehrwert schaffen. Jeden Tag, in jedem Detail – für unsere Gäste, Partner und für dich als Teammitglied."],
+  ["🤝","Eigentümergeführt & direkt","Kurze Wege, schnelle Entscheidungen. Du arbeitest direkt mit den Inhabern zusammen – deine Ideen und dein Einsatz werden gesehen."],
+  ["📈","Hohe Erwartungen","Wir erwarten viel – von uns selbst und von dir. Pünktlichkeit, Sorgfalt und Eigenverantwortung sind bei uns nicht verhandelbar. Dafür wächst du mit uns."]],
+ chooseTitle:"Wo und als was startest du?",
+ chooseLocation:"1. Wähle deinen Standort",
+ choosePosition:"2. Wähle deine Position",
+ locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Zürich Airport, Glattbrugg"]],
+ positions:[["🧹","Housekeeping","Zimmer & öffentliche Bereiche"],["🛎️","Rezeption","Empfang & Gästebetreuung"]],
+ sopTitle:"Deine SOP – so arbeiten wir.",
+ sopIntroHk:"Das sind die verbindlichen Standards für Housekeeping an deinem Standort. Lies alles sorgfältig durch – du bestätigst sie im nächsten Schritt.",
+ sopIntroRez:"Das sind die verbindlichen Standards für die Rezeption an deinem Standort. Schau dir die Schulungsvideos vollständig an – du bestätigst im nächsten Schritt.",
+ timesTitle:"Zeitvorgaben Zimmerreinigung",
+ noTimes:"Für diesen Standort gelten die allgemeinen Qualitätsstandards; Zeitvorgaben teilt dir deine Leitung mit.",
+ hkRules:["📷 <b>Start-Foto:</b> Beim Start jeder Zimmerreinigung machst du im Housekeeping-Tool ein Foto – erst dann beginnt die Reinigung.","⏱ <b>Timer:</b> Ab dem Start läuft die Zeit. Die Zeitvorgaben oben sind verbindlich und werden kontrolliert.","🧴 <b>Standards:</b> Jedes Departure-Zimmer wird komplett gereinigt: Bett, Bad, Dusche, Staub, Boden, Minibar, Verbrauchsmaterial.","📝 <b>Protokolle:</b> Küche und Toiletten: Nach jeder Reinigung sofort ins Protokoll eintragen (Uhrzeit, Name, Visum). Fehlende Einträge gelten als nicht gereinigt.","🔧 <b>Schäden melden:</b> Defekte oder Schäden sofort im Tool melden – nicht liegen lassen.","✅ <b>Kontrolle:</b> Die Leitung prüft Zimmer, Zeiten und Protokolle regelmässig."],
+ rezRules:["🎬 <b>Schulungsvideos:</b> Schau dir ALLE Videos im Schulungsordner vollständig an – sie sind Pflicht, bevor du deine erste Schicht alleine arbeitest.","🤝 <b>Gäste zuerst:</b> Jeder Gast wird freundlich begrüsst – Check-in/Check-out nach Standard, Probleme löst du sofort oder eskalierst an die Leitung.","📞 <b>Erreichbarkeit:</b> Telefon und E-Mails werden zeitnah beantwortet – keine offenen Anfragen am Schichtende.","💳 <b>Abrechnung:</b> Kasse, Zahlungen und Tagesabschlüsse immer sauber und vollständig.","📝 <b>Übergabe:</b> Jede Schicht endet mit einer klaren Übergabe an die nächste."],
+ videoTitle:"🎬 Deine Schulungsvideos",
+ videoText:"Alle Trainings-Videos findest du im Google-Drive-Ordner. Schau sie vollständig an – sie erklären dir Schritt für Schritt die Systeme und Abläufe.",
+ videoBtn:"Schulungsvideos öffnen",
+ pdfTitle:"SOP-Dokument zum Nachlesen (PDF):",
+ sopRead:"Ich habe alles gelesen →",
+ commitTitle:"Dein Commitment.",
+ expectKicker:"Unsere Erwartungen",
+ expectText:"Wir sind ehrlich: Unsere Erwartungen sind hoch. Wir erwarten Pünktlichkeit, Sorgfalt, Eigenverantwortung und Einsatz – jeden Tag. Dafür bekommst du ein Team, das dich unterstützt, direkte Ansprechpartner und die Chance, mit uns zu wachsen. Qualität ist bei Amanthos keine Ausnahme, sondern der Standard.",
+ yourName:"Dein Vor- und Nachname",
+ agreeSop:"Ich habe die SOP für meinen Standort und meine Position gelesen und verstanden. Ich werde sie einhalten.",
+ agreeExpect:"Mir ist bewusst, dass die Erwartungen hoch sind – Qualität, Pünktlichkeit und die Zeitvorgaben sind verbindlich und werden kontrolliert.",
+ commitBtn:"Ich stimme zu ✓",
+ doneTitle:"Willkommen im Team!",
+ doneLead:"Dein Onboarding ist abgeschlossen. Sende uns jetzt noch deine Bestätigung – danach geht es mit deiner Einführung vor Ort weiter.",
+ doneMail:"Bestätigung per E-Mail senden",
+ mailSubj:"Onboarding-Bestätigung",
+ mailBody:(n,l,p)=>`Hallo\n\nIch habe das Amanthos-Onboarding abgeschlossen und bestätige die SOP.\n\nName: ${n}\nStandort: ${l}\nPosition: ${p}\nDatum: ${new Date().toLocaleDateString("de-CH")}\n\nFreundliche Grüsse\n${n}`,
+ sumName:"Name", sumLoc:"Standort", sumPos:"Position", sumDate:"Datum"},
+en: {next:"Next →", back:"← Back",
+ welcomeTitle:"Welcome to <em>Amanthos</em>.",
+ welcomeLead:"Great to have you here! Amanthos is an owner-managed group with hotels and serviced apartments in Switzerland – prize by Radisson in Affoltern am Albis, Hotel Mulin in Brigels and Amanthos Living at Zurich Airport. Before you start, here is what we stand for. Tap the cards:",
+ cardsHint:"👆 Tap all cards to read them.",
+ values:[["🎯","Performance is central","Results matter here. We measure our work – from a perfectly clean room to guest reviews. Those who perform get responsibility and recognition."],
+  ["💎","Creating Tangible Added Value","Our motto: create tangible added value. Every day, in every detail – for our guests, partners and for you as a team member."],
+  ["🤝","Owner-managed & direct","Short paths, fast decisions. You work directly with the owners – your ideas and effort are seen."],
+  ["📈","High expectations","We expect a lot – from ourselves and from you. Punctuality, care and ownership are non-negotiable. In return, you grow with us."]],
+ chooseTitle:"Where and in which role do you start?",
+ chooseLocation:"1. Choose your location",
+ choosePosition:"2. Choose your position",
+ locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Zurich Airport, Glattbrugg"]],
+ positions:[["🧹","Housekeeping","Rooms & public areas"],["🛎️","Reception","Front desk & guest care"]],
+ sopTitle:"Your SOP – how we work.",
+ sopIntroHk:"These are the binding housekeeping standards at your location. Read everything carefully – you will confirm them in the next step.",
+ sopIntroRez:"These are the binding reception standards at your location. Watch all training videos in full – you will confirm in the next step.",
+ timesTitle:"Room cleaning time standards",
+ noTimes:"General quality standards apply at this location; your manager will give you the time standards.",
+ hkRules:["📷 <b>Start photo:</b> At the start of every room you take a photo in the housekeeping tool – only then does cleaning begin.","⏱ <b>Timer:</b> The clock runs from the start. The time standards above are binding and are checked.","🧴 <b>Standards:</b> Every departure room is cleaned completely: bed, bathroom, shower, dust, floor, minibar, supplies.","📝 <b>Log sheets:</b> Kitchen and toilets: sign the log immediately after each cleaning (time, name, initials). Missing entries count as not cleaned.","🔧 <b>Report damage:</b> Report defects immediately in the tool – never leave them.","✅ <b>Checks:</b> Management regularly checks rooms, times and logs."],
+ rezRules:["🎬 <b>Training videos:</b> Watch ALL videos in the training folder in full – mandatory before your first solo shift.","🤝 <b>Guests first:</b> Every guest is greeted warmly – check-in/check-out by standard, solve problems immediately or escalate.","📞 <b>Availability:</b> Answer phone and e-mails promptly – no open requests at the end of your shift.","💳 <b>Accounting:</b> Cash, payments and end-of-day always clean and complete.","📝 <b>Handover:</b> Every shift ends with a clear handover to the next."],
+ videoTitle:"🎬 Your training videos",
+ videoText:"All training videos are in the Google Drive folder. Watch them in full – they explain the systems and procedures step by step.",
+ videoBtn:"Open training videos",
+ pdfTitle:"SOP document for reference (PDF):",
+ sopRead:"I have read everything →",
+ commitTitle:"Your commitment.",
+ expectKicker:"Our expectations",
+ expectText:"Let's be honest: our expectations are high. We expect punctuality, care, ownership and commitment – every day. In return you get a team that supports you, direct contacts and the chance to grow with us. At Amanthos, quality is not the exception – it is the standard.",
+ yourName:"Your first and last name",
+ agreeSop:"I have read and understood the SOP for my location and position. I will follow them.",
+ agreeExpect:"I am aware that expectations are high – quality, punctuality and the time standards are binding and will be checked.",
+ commitBtn:"I agree ✓",
+ doneTitle:"Welcome to the team!",
+ doneLead:"Your onboarding is complete. Send us your confirmation now – then your on-site introduction continues.",
+ doneMail:"Send confirmation by e-mail",
+ mailSubj:"Onboarding confirmation",
+ mailBody:(n,l,p)=>`Hello\n\nI have completed the Amanthos onboarding and confirm the SOP.\n\nName: ${n}\nLocation: ${l}\nPosition: ${p}\nDate: ${new Date().toLocaleDateString("en-GB")}\n\nBest regards\n${n}`,
+ sumName:"Name", sumLoc:"Location", sumPos:"Position", sumDate:"Date"},
+pl: {next:"Dalej →", back:"← Wstecz",
+ welcomeTitle:"Witamy w <em>Amanthos</em>.",
+ welcomeLead:"Cieszymy się, że jesteś! Amanthos to zarządzana przez właścicieli grupa hoteli i apartamentów w Szwajcarii – prize by Radisson w Affoltern am Albis, Hotel Mulin w Brigels i Amanthos Living przy lotnisku w Zurychu. Zanim zaczniesz, zobacz, co jest dla nas ważne. Kliknij karty:",
+ cardsHint:"👆 Kliknij wszystkie karty, aby je przeczytać.",
+ values:[["🎯","Wyniki są najważniejsze","Liczy się rezultat. Mierzymy naszą pracę – od idealnie czystego pokoju po opinie gości. Kto daje z siebie wszystko, dostaje odpowiedzialność i uznanie."],
+  ["💎","Creating Tangible Added Value","Nasze motto: tworzyć wymierną wartość. Każdego dnia, w każdym detalu – dla gości, partnerów i dla Ciebie jako członka zespołu."],
+  ["🤝","Firma właścicielska","Krótkie ścieżki decyzji. Pracujesz bezpośrednio z właścicielami – Twoje pomysły i zaangażowanie są widoczne."],
+  ["📈","Wysokie oczekiwania","Oczekujemy wiele – od siebie i od Ciebie. Punktualność, staranność i odpowiedzialność nie podlegają negocjacjom. W zamian rozwijasz się z nami."]],
+ chooseTitle:"Gdzie i na jakim stanowisku zaczynasz?",
+ chooseLocation:"1. Wybierz lokalizację",
+ choosePosition:"2. Wybierz stanowisko",
+ locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Lotnisko Zurych, Glattbrugg"]],
+ positions:[["🧹","Housekeeping","Pokoje i strefy ogólne"],["🛎️","Recepcja","Obsługa gości"]],
+ sopTitle:"Twoje SOP – tak pracujemy.",
+ sopIntroHk:"To wiążące standardy housekeepingu w Twojej lokalizacji. Przeczytaj wszystko uważnie – potwierdzisz je w następnym kroku.",
+ sopIntroRez:"To wiążące standardy recepcji w Twojej lokalizacji. Obejrzyj wszystkie filmy szkoleniowe w całości – potwierdzisz w następnym kroku.",
+ timesTitle:"Normy czasowe sprzątania pokoi",
+ noTimes:"W tej lokalizacji obowiązują ogólne standardy jakości; normy czasowe poda Ci kierownictwo.",
+ hkRules:["📷 <b>Zdjęcie startowe:</b> Na początku sprzątania każdego pokoju robisz zdjęcie w aplikacji – dopiero wtedy zaczyna się sprzątanie.","⏱ <b>Stoper:</b> Czas liczy się od startu. Normy czasowe powyżej są wiążące i kontrolowane.","🧴 <b>Standardy:</b> Każdy pokój departure sprzątany jest kompletnie: łóżko, łazienka, prysznic, kurz, podłoga, minibar, materiały.","📝 <b>Protokoły:</b> Kuchnia i toalety: po każdym sprzątaniu natychmiast wpis do protokołu (godzina, imię, podpis). Brak wpisu = nie posprzątane.","🔧 <b>Zgłaszanie usterek:</b> Usterki i szkody zgłaszaj od razu w aplikacji.","✅ <b>Kontrola:</b> Kierownictwo regularnie sprawdza pokoje, czasy i protokoły."],
+ rezRules:["🎬 <b>Filmy szkoleniowe:</b> Obejrzyj WSZYSTKIE filmy w folderze szkoleniowym w całości – to obowiązek przed pierwszą samodzielną zmianą.","🤝 <b>Gość przede wszystkim:</b> Każdego gościa witamy uprzejmie – check-in/check-out według standardu, problemy rozwiązuj od razu lub eskaluj.","📞 <b>Dostępność:</b> Telefony i e-maile obsługujemy na bieżąco – żadnych otwartych spraw na koniec zmiany.","💳 <b>Rozliczenia:</b> Kasa, płatności i zamknięcie dnia zawsze kompletne i dokładne.","📝 <b>Przekazanie zmiany:</b> Każda zmiana kończy się jasnym przekazaniem następnej osobie."],
+ videoTitle:"🎬 Twoje filmy szkoleniowe",
+ videoText:"Wszystkie filmy szkoleniowe znajdziesz w folderze Google Drive. Obejrzyj je w całości – krok po kroku wyjaśniają systemy i procedury.",
+ videoBtn:"Otwórz filmy szkoleniowe",
+ pdfTitle:"Dokument SOP do wglądu (PDF):",
+ sopRead:"Przeczytałem/-am wszystko →",
+ commitTitle:"Twoje zobowiązanie.",
+ expectKicker:"Nasze oczekiwania",
+ expectText:"Powiedzmy szczerze: nasze oczekiwania są wysokie. Oczekujemy punktualności, staranności, odpowiedzialności i zaangażowania – każdego dnia. W zamian dostajesz zespół, który Cię wspiera, bezpośredni kontakt z przełożonymi i szansę rozwoju. W Amanthos jakość to nie wyjątek – to standard.",
+ yourName:"Twoje imię i nazwisko",
+ agreeSop:"Przeczytałem/-am i zrozumiałem/-am SOP dla mojej lokalizacji i stanowiska. Będę ich przestrzegać.",
+ agreeExpect:"Wiem, że oczekiwania są wysokie – jakość, punktualność i normy czasowe są wiążące i będą kontrolowane.",
+ commitBtn:"Zgadzam się ✓",
+ doneTitle:"Witamy w zespole!",
+ doneLead:"Twój onboarding jest zakończony. Wyślij nam teraz potwierdzenie – potem czeka Cię wprowadzenie na miejscu.",
+ doneMail:"Wyślij potwierdzenie e-mailem",
+ mailSubj:"Potwierdzenie onboardingu",
+ mailBody:(n,l,p)=>`Dzień dobry\n\nUkończyłem/-am onboarding Amanthos i potwierdzam SOP.\n\nImię i nazwisko: ${n}\nLokalizacja: ${l}\nStanowisko: ${p}\nData: ${new Date().toLocaleDateString("pl-PL")}\n\nPozdrawiam\n${n}`,
+ sumName:"Imię i nazwisko", sumLoc:"Lokalizacja", sumPos:"Stanowisko", sumDate:"Data"},
+};
+const LOCS = ["prize","mulin","living"];
+const SOPTIMES = {
+ prize: [["25","dep0",""],["15","res","red"]],
+ mulin: [["30","dep1",""],["40","dep2",""],["15","dep3",""],["15","res","red"]],
+ living: null };
+const TIMELBL = {
+ de: {dep0:"Departure-Zimmer", dep1:"Departure Doppelzimmer", dep2:"Departure Galerie-Zimmer", dep3:"Departure Einzelzimmer", res:"Restant-Zimmer"},
+ en: {dep0:"Departure room", dep1:"Departure double room", dep2:"Departure gallery room", dep3:"Departure single room", res:"Stayover room"},
+ pl: {dep0:"Pokój departure", dep1:"Departure – pokój 2-os.", dep2:"Departure – z antresolą", dep3:"Departure – pokój 1-os.", res:"Pokój restant"}};
+const PDFS = {
+ prize: {de:"sop/Prize_Affoltern_Reinigungskonzept_SOP_DE.pdf", en:"sop/Prize_Affoltern_Reinigungskonzept_SOP_EN.pdf", pl:"sop/Prize_Affoltern_Reinigungskonzept_SOP_PL.pdf"},
+ mulin: {de:"sop/HotelMulin_Brigels_Reinigungskonzept_SOP_DE.pdf", en:"sop/HotelMulin_Brigels_Reinigungskonzept_SOP_EN.pdf", pl:"sop/HotelMulin_Brigels_Reinigungskonzept_SOP_PL.pdf"},
+ living: {de:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_DE.pdf", en:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_EN.pdf", pl:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_PL.pdf"}};
+
+let lang="de", loc=null, pos=null, opened=new Set();
+function t(){return T[lang]}
+function setLang(l){lang=l;document.querySelectorAll(".langs button").forEach(b=>b.classList.remove("on"));document.getElementById("l-"+l).classList.add("on");renderStatic();if(document.getElementById("s3").classList.contains("on"))renderSop();}
+function renderStatic(){
+ document.querySelectorAll("[data-i]").forEach(el=>{const k=el.getAttribute("data-i");if(t()[k])el.innerHTML=t()[k];});
+ const vc=document.getElementById("valuecards");vc.innerHTML="";
+ t().values.forEach((v,i)=>{const d=document.createElement("div");d.className="vcard"+(opened.has(i)?" open":"");
+  d.innerHTML=`<div style="font-size:26px;margin-bottom:6px">${v[0]}</div><h3>${v[1]}</h3><p>${v[2]}</p><div class="more">▾</div>`;
+  d.onclick=()=>{opened.add(i);d.classList.add("open");};vc.appendChild(d);});
+ const lg=document.getElementById("locgrid");lg.innerHTML="";
+ t().locations.forEach((l,i)=>{const d=document.createElement("div");d.className="sel"+(loc===LOCS[i]?" on":"");
+  d.innerHTML=`<div class="ico">${l[0]}</div><h3>${l[1]}</h3><p>${l[2]}</p>`;
+  d.onclick=()=>{loc=LOCS[i];renderStatic();check2();};lg.appendChild(d);});
+ const pg=document.getElementById("posgrid");pg.innerHTML="";
+ t().positions.forEach((p,i)=>{const key=i===0?"hk":"rez";const d=document.createElement("div");d.className="sel"+(pos===key?" on":"");
+  d.innerHTML=`<div class="ico">${p[0]}</div><h3>${p[1]}</h3><p>${p[2]}</p>`;
+  d.onclick=()=>{pos=key;renderStatic();check2();};pg.appendChild(d);});
+}
+function check2(){document.getElementById("next2").disabled=!(loc&&pos);}
+function go(n){document.querySelectorAll(".step").forEach(s=>s.classList.remove("on"));document.getElementById("s"+n).classList.add("on");
+ for(let i=1;i<=4;i++)document.getElementById("p"+i).classList.toggle("done",i<=Math.min(n,4));window.scrollTo({top:0,behavior:"smooth"});}
+function locName(){return t().locations[LOCS.indexOf(loc)][1]+" – "+t().locations[LOCS.indexOf(loc)][2];}
+function posName(){return t().positions[pos==="hk"?0:1][1];}
+function renderSop(){
+ document.getElementById("sopIntro").innerHTML=pos==="hk"?t().sopIntroHk:t().sopIntroRez;
+ let h=`<div class="sopbox"><h2 style="margin-top:0">${locName()} · ${posName()}</h2>`;
+ if(pos==="hk"){
+   h+=`<h3 style="margin:10px 0 4px">${t().timesTitle}</h3>`;
+   if(SOPTIMES[loc]){h+=`<div class="times">`+SOPTIMES[loc].map(x=>`<div class="time ${x[2]}"><b>${x[0]}'</b><span>${TIMELBL[lang][x[1]]}</span></div>`).join("")+`</div>`;}
+   else h+=`<p class="hint">${t().noTimes}</p>`;
+   h+=`<ul class="rules">`+t().hkRules.map(r=>`<li>${r}</li>`).join("")+`</ul>`;
+   h+=`<div class="pdfs" style="margin-top:14px"><b style="font-size:13.5px">${t().pdfTitle}</b><br><a href="${PDFS[loc].de}" target="_blank">🇩🇪 Deutsch</a><a href="${PDFS[loc].en}" target="_blank">🇬🇧 English</a><a href="${PDFS[loc].pl}" target="_blank">🇵🇱 Polski</a></div>`;
+ } else {
+   h+=`<div class="videobox"><h3>${t().videoTitle}</h3><p>${t().videoText}</p><a class="btn" style="font-size:15px;padding:12px 22px" href="${VIDEOS}" target="_blank">${t().videoBtn} ↗</a></div>`;
+   h+=`<ul class="rules">`+t().rezRules.map(r=>`<li>${r}</li>`).join("")+`</ul>`;
+ }
+ h+=`</div>`;
+ document.getElementById("sopContent").innerHTML=h;
+}
+function checkCommit(){const ok=document.getElementById("name").value.trim().length>2&&document.getElementById("agree1").checked&&document.getElementById("agree2").checked;
+ document.getElementById("commitBtn").disabled=!ok;}
+function finish(){const n=document.getElementById("name").value.trim();
+ document.getElementById("summary").innerHTML=`<b>${t().sumName}:</b> ${n}<br><b>${t().sumLoc}:</b> ${locName()}<br><b>${t().sumPos}:</b> ${posName()}<br><b>${t().sumDate}:</b> ${new Date().toLocaleDateString()}`;
+ const body=encodeURIComponent(t().mailBody(n,locName(),posName()));
+ document.getElementById("mailBtn").href=`mailto:kaito.weingart@amanthos.com?subject=${encodeURIComponent(t().mailSubj+" – "+n)}&body=${body}`;
+ document.querySelectorAll(".step").forEach(s=>s.classList.remove("on"));document.getElementById("s5").classList.add("on");
+ for(let i=1;i<=4;i++)document.getElementById("p"+i).classList.add("done");window.scrollTo({top:0});}
+setLang("de");
+</script>
+</body>
+</html>
