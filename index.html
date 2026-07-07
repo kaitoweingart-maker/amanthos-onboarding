@@ -145,14 +145,14 @@ de: {next:"Weiter →", back:"← Zurück",
  welcomeTitle:"Willkommen bei <em>Amanthos</em>.",
  welcomeLead:"Schön, dass du da bist! Amanthos ist eine eigentümergeführte Gruppe mit Hotels und Serviced Apartments in der Schweiz – prize by Radisson in Affoltern am Albis, Hotel Mulin in Brigels und Amanthos Living am Flughafen Zürich. Bevor du startest, zeigen wir dir, wofür wir stehen. Tippe auf die Karten:",
  cardsHint:"👆 Tippe alle Karten an, um sie zu lesen.",
- values:[["🎯","Performance steht im Zentrum","Bei uns zählt das Ergebnis. Wir messen unsere Arbeit – vom sauberen Zimmer bis zur Gästebewertung. Wer Leistung bringt, bekommt Verantwortung und Wertschätzung."],
+ values:[["🎯","Performance steht im Zentrum","Bei uns zählt das Ergebnis – und wir machen Leistung sichtbar: Reinigungszeiten werden mit Timer und Start-Foto erfasst, Gästebewertungen lesen wir jede Woche, und im Housekeeping-Tool siehst du dein eigenes Leaderboard. Das ist kein Kontrollwahn, sondern Fairness: Wer gut arbeitet, wird gesehen – und bekommt mehr Verantwortung, bessere Einsätze und ehrliches Feedback. Umgekehrt sprechen wir Probleme direkt an, statt sie liegen zu lassen."],
   ["💎","Creating Tangible Added Value","Unser Motto: greifbaren Mehrwert schaffen. Jeden Tag, in jedem Detail – für unsere Gäste, Partner und für dich als Teammitglied."],
   ["🤝","Eigentümergeführt & direkt","Kurze Wege, schnelle Entscheidungen. Du arbeitest direkt mit den Inhabern zusammen – deine Ideen und dein Einsatz werden gesehen."],
   ["📈","Hohe Erwartungen","Wir erwarten viel – von uns selbst und von dir. Pünktlichkeit, Sorgfalt und Eigenverantwortung sind bei uns nicht verhandelbar. Dafür wächst du mit uns."]],
  chooseTitle:"Wo und als was startest du?",
  chooseLocation:"1. Wähle deinen Standort",
  choosePosition:"2. Wähle deine Position",
- locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Zürich Airport, Glattbrugg"]],
+ locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Zürich Airport, Glattbrugg"],["🏞️","Chalet Swiss Hotel","Interlaken"]],
  positions:[["🧹","Housekeeping","Zimmer & öffentliche Bereiche"],["🛎️","Rezeption","Empfang & Gästebetreuung"]],
  sopTitle:"Deine SOP – so arbeiten wir.",
  sopIntroHk:"Das sind die verbindlichen Standards für Housekeeping an deinem Standort. Lies alles sorgfältig durch – du bestätigst sie im nächsten Schritt.",
@@ -178,19 +178,28 @@ de: {next:"Weiter →", back:"← Zurück",
  doneMail:"Bestätigung per E-Mail senden",
  mailSubj:"Onboarding-Bestätigung",
  mailBody:(n,l,p)=>`Hallo\n\nIch habe das Amanthos-Onboarding abgeschlossen und bestätige die SOP.\n\nName: ${n}\nStandort: ${l}\nPosition: ${p}\nDatum: ${new Date().toLocaleDateString("de-CH")}\n\nFreundliche Grüsse\n${n}`,
- sumName:"Name", sumLoc:"Standort", sumPos:"Position", sumDate:"Datum"},
+ sumName:"Name", sumLoc:"Standort", sumPos:"Position", sumDate:"Datum",
+ toolsTitle:"🔗 Deine Tools – täglich im Einsatz",
+ toolHk:"Housekeeping-Tool", toolHkDesc:"Hier meldest du dich jeden Tag an: Zimmer sehen, Reinigung mit Foto starten, Schäden melden.",
+ toolInvoice:"Rechnungstool", toolInvoiceDesc:"Hier erstellst du an der Rezeption die Rechnungen für Gäste.",
+ toolOpen:"Öffnen ↗",
+ foodTitle:"🍽 Verpflegung im prize",
+ foodItems:["Mittag- und Abendessen: im <b>Coop Restaurant</b> nebenan – <b>aufs Hotel schreiben lassen</b>.","<b>Samstag:</b> Takeaway für Sonntag mitnehmen – am <b>Sonntag gibt es kein Serving</b> im Coop Restaurant.","Bei Fragen zur Verpflegung: an deine Ansprechperson unten wenden."],
+ contactsTitle:"👥 Deine Ansprechpartner – so bekommst du Hilfe",
+ contactHk:"Fragen zu Housekeeping", contactRez:"Fragen zur Rezeption", contactEmergency:"Notfälle & persönliche Anliegen",
+ contactIntro:"Du musst nichts alleine lösen. Melde dich einfach – lieber einmal zu viel gefragt als einmal zu wenig:"},
 en: {next:"Next →", back:"← Back",
  welcomeTitle:"Welcome to <em>Amanthos</em>.",
  welcomeLead:"Great to have you here! Amanthos is an owner-managed group with hotels and serviced apartments in Switzerland – prize by Radisson in Affoltern am Albis, Hotel Mulin in Brigels and Amanthos Living at Zurich Airport. Before you start, here is what we stand for. Tap the cards:",
  cardsHint:"👆 Tap all cards to read them.",
- values:[["🎯","Performance is central","Results matter here. We measure our work – from a perfectly clean room to guest reviews. Those who perform get responsibility and recognition."],
+ values:[["🎯","Performance is central","Results matter here – and we make performance visible: cleaning times are tracked with a timer and start photo, we read guest reviews every week, and the housekeeping tool shows your own leaderboard. This is not surveillance – it is fairness: those who work well are seen and get more responsibility, better shifts and honest feedback. And we address problems directly instead of letting them sit."],
   ["💎","Creating Tangible Added Value","Our motto: create tangible added value. Every day, in every detail – for our guests, partners and for you as a team member."],
   ["🤝","Owner-managed & direct","Short paths, fast decisions. You work directly with the owners – your ideas and effort are seen."],
   ["📈","High expectations","We expect a lot – from ourselves and from you. Punctuality, care and ownership are non-negotiable. In return, you grow with us."]],
  chooseTitle:"Where and in which role do you start?",
  chooseLocation:"1. Choose your location",
  choosePosition:"2. Choose your position",
- locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Zurich Airport, Glattbrugg"]],
+ locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Zurich Airport, Glattbrugg"],["🏞️","Chalet Swiss Hotel","Interlaken"]],
  positions:[["🧹","Housekeeping","Rooms & public areas"],["🛎️","Reception","Front desk & guest care"]],
  sopTitle:"Your SOP – how we work.",
  sopIntroHk:"These are the binding housekeeping standards at your location. Read everything carefully – you will confirm them in the next step.",
@@ -216,19 +225,28 @@ en: {next:"Next →", back:"← Back",
  doneMail:"Send confirmation by e-mail",
  mailSubj:"Onboarding confirmation",
  mailBody:(n,l,p)=>`Hello\n\nI have completed the Amanthos onboarding and confirm the SOP.\n\nName: ${n}\nLocation: ${l}\nPosition: ${p}\nDate: ${new Date().toLocaleDateString("en-GB")}\n\nBest regards\n${n}`,
- sumName:"Name", sumLoc:"Location", sumPos:"Position", sumDate:"Date"},
+ sumName:"Name", sumLoc:"Location", sumPos:"Position", sumDate:"Date",
+ toolsTitle:"🔗 Your tools – used every day",
+ toolHk:"Housekeeping tool", toolHkDesc:"Log in here every day: see your rooms, start cleaning with a photo, report damage.",
+ toolInvoice:"Invoice tool", toolInvoiceDesc:"Create guest invoices at the reception here.",
+ toolOpen:"Open ↗",
+ foodTitle:"🍽 Meals at prize",
+ foodItems:["Lunch and dinner: at the <b>Coop restaurant</b> next door – <b>charge it to the hotel</b>.","<b>Saturday:</b> take takeaway for Sunday – there is <b>no serving on Sunday</b> at the Coop restaurant.","Questions about meals? Ask your contact person below."],
+ contactsTitle:"👥 Your contact persons – how to get help",
+ contactHk:"Housekeeping questions", contactRez:"Reception questions", contactEmergency:"Emergencies & personal matters",
+ contactIntro:"You never have to solve things alone. Just reach out – better to ask once too often than once too little:"},
 pl: {next:"Dalej →", back:"← Wstecz",
  welcomeTitle:"Witamy w <em>Amanthos</em>.",
  welcomeLead:"Cieszymy się, że jesteś! Amanthos to zarządzana przez właścicieli grupa hoteli i apartamentów w Szwajcarii – prize by Radisson w Affoltern am Albis, Hotel Mulin w Brigels i Amanthos Living przy lotnisku w Zurychu. Zanim zaczniesz, zobacz, co jest dla nas ważne. Kliknij karty:",
  cardsHint:"👆 Kliknij wszystkie karty, aby je przeczytać.",
- values:[["🎯","Wyniki są najważniejsze","Liczy się rezultat. Mierzymy naszą pracę – od idealnie czystego pokoju po opinie gości. Kto daje z siebie wszystko, dostaje odpowiedzialność i uznanie."],
+ values:[["🎯","Wyniki są najważniejsze","Liczy się rezultat – i pokazujemy wyniki jasno: czasy sprzątania mierzymy stoperem i zdjęciem startowym, co tydzień czytamy opinie gości, a w aplikacji housekeepingu widzisz własny ranking. To nie kontrola dla kontroli – to uczciwość: kto pracuje dobrze, jest zauważany i dostaje więcej odpowiedzialności, lepsze zmiany i szczery feedback. Problemy omawiamy od razu, zamiast je odkładać."],
   ["💎","Creating Tangible Added Value","Nasze motto: tworzyć wymierną wartość. Każdego dnia, w każdym detalu – dla gości, partnerów i dla Ciebie jako członka zespołu."],
   ["🤝","Firma właścicielska","Krótkie ścieżki decyzji. Pracujesz bezpośrednio z właścicielami – Twoje pomysły i zaangażowanie są widoczne."],
   ["📈","Wysokie oczekiwania","Oczekujemy wiele – od siebie i od Ciebie. Punktualność, staranność i odpowiedzialność nie podlegają negocjacjom. W zamian rozwijasz się z nami."]],
  chooseTitle:"Gdzie i na jakim stanowisku zaczynasz?",
  chooseLocation:"1. Wybierz lokalizację",
  choosePosition:"2. Wybierz stanowisko",
- locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Lotnisko Zurych, Glattbrugg"]],
+ locations:[["🏨","prize by Radisson","Affoltern am Albis"],["🏔️","Hotel Mulin by Amanthos","Brigels"],["✈️","Amanthos Living","Lotnisko Zurych, Glattbrugg"],["🏞️","Chalet Swiss Hotel","Interlaken"]],
  positions:[["🧹","Housekeeping","Pokoje i strefy ogólne"],["🛎️","Recepcja","Obsługa gości"]],
  sopTitle:"Twoje SOP – tak pracujemy.",
  sopIntroHk:"To wiążące standardy housekeepingu w Twojej lokalizacji. Przeczytaj wszystko uważnie – potwierdzisz je w następnym kroku.",
@@ -254,13 +272,32 @@ pl: {next:"Dalej →", back:"← Wstecz",
  doneMail:"Wyślij potwierdzenie e-mailem",
  mailSubj:"Potwierdzenie onboardingu",
  mailBody:(n,l,p)=>`Dzień dobry\n\nUkończyłem/-am onboarding Amanthos i potwierdzam SOP.\n\nImię i nazwisko: ${n}\nLokalizacja: ${l}\nStanowisko: ${p}\nData: ${new Date().toLocaleDateString("pl-PL")}\n\nPozdrawiam\n${n}`,
- sumName:"Imię i nazwisko", sumLoc:"Lokalizacja", sumPos:"Stanowisko", sumDate:"Data"},
+ sumName:"Imię i nazwisko", sumLoc:"Lokalizacja", sumPos:"Stanowisko", sumDate:"Data",
+ toolsTitle:"🔗 Twoje narzędzia – codziennie w użyciu",
+ toolHk:"Aplikacja housekeeping", toolHkDesc:"Tu logujesz się każdego dnia: pokoje, start sprzątania ze zdjęciem, zgłaszanie usterek.",
+ toolInvoice:"Program do faktur", toolInvoiceDesc:"Tu na recepcji wystawiasz rachunki dla gości.",
+ toolOpen:"Otwórz ↗",
+ foodTitle:"🍽 Wyżywienie w prize",
+ foodItems:["Obiad i kolacja: w <b>restauracji Coop</b> obok – <b>zapisz na hotel</b>.","<b>Sobota:</b> weź takeaway na niedzielę – w <b>niedzielę restauracja Coop nie serwuje</b>.","Pytania o wyżywienie? Zwróć się do osoby kontaktowej poniżej."],
+ contactsTitle:"👥 Twoje osoby kontaktowe – tak uzyskasz pomoc",
+ contactHk:"Pytania o housekeeping", contactRez:"Pytania o recepcję", contactEmergency:"Nagłe wypadki i sprawy osobiste",
+ contactIntro:"Niczego nie musisz rozwiązywać w pojedynkę. Po prostu się odezwij – lepiej zapytać raz za dużo niż raz za mało:"},
 };
-const LOCS = ["prize","mulin","living"];
+const LOCS = ["prize","mulin","living","chalet"];
+const TOOLS = {
+ prize:  {hk:"https://housekeeping-tool-ptu8.onrender.com/login", invoice:"https://amanthos-rechnungstool.onrender.com/?brand=pbr"},
+ chalet: {hk:"https://chalet-swiss-housekeeping.onrender.com/login", invoice:null},
+ mulin:  {hk:null, invoice:null},
+ living: {hk:null, invoice:null}};
+const CONTACTS = {
+ prize:  [["🧹","hk","Agata Machelska"],["🛎️","rez","Zuzanna Cwynar"],["🚨","emergency","Kaito Weingart"]],
+ chalet: [["🧹","hk","Isa Pimenta"],["🛎️","rez","Kamila Ceglarz"],["🚨","emergency","Kaito Weingart"]],
+ mulin:  [["🧹","hk","Agata Machelska"],["🛎️","rez","Samia Rodrigues"],["🚨","emergency","Kaito Weingart"]],
+ living: [["🚨","emergency","Kaito Weingart"]]};
 const SOPTIMES = {
  prize: [["25","dep0",""],["15","res","red"]],
  mulin: [["30","dep1",""],["40","dep2",""],["15","dep3",""],["15","res","red"]],
- living: null };
+ living: null, chalet: null };
 const TIMELBL = {
  de: {dep0:"Departure-Zimmer", dep1:"Departure Doppelzimmer", dep2:"Departure Galerie-Zimmer", dep3:"Departure Einzelzimmer", res:"Restant-Zimmer"},
  en: {dep0:"Departure room", dep1:"Departure double room", dep2:"Departure gallery room", dep3:"Departure single room", res:"Stayover room"},
@@ -268,7 +305,8 @@ const TIMELBL = {
 const PDFS = {
  prize: {de:"sop/Prize_Affoltern_Reinigungskonzept_SOP_DE.pdf", en:"sop/Prize_Affoltern_Reinigungskonzept_SOP_EN.pdf", pl:"sop/Prize_Affoltern_Reinigungskonzept_SOP_PL.pdf"},
  mulin: {de:"sop/HotelMulin_Brigels_Reinigungskonzept_SOP_DE.pdf", en:"sop/HotelMulin_Brigels_Reinigungskonzept_SOP_EN.pdf", pl:"sop/HotelMulin_Brigels_Reinigungskonzept_SOP_PL.pdf"},
- living: {de:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_DE.pdf", en:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_EN.pdf", pl:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_PL.pdf"}};
+ living: {de:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_DE.pdf", en:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_EN.pdf", pl:"sop/AmanthosLiving_Glattbrugg_Reinigungskonzept_PL.pdf"},
+ chalet: null};
 
 let lang="de", loc=null, pos=null, opened=new Set();
 function t(){return T[lang]}
@@ -315,12 +353,30 @@ function renderSop(){
    if(SOPTIMES[loc]){h+=`<div class="times">`+SOPTIMES[loc].map(x=>`<div class="time ${x[2]}"><b>${x[0]}'</b><span>${TIMELBL[lang][x[1]]}</span></div>`).join("")+`</div>`;}
    else h+=`<p class="hint">${t().noTimes}</p>`;
    h+=`<ul class="rules">`+t().hkRules.map(r=>`<li>${r}</li>`).join("")+`</ul>`;
-   h+=`<div class="pdfs" style="margin-top:14px"><b style="font-size:13.5px">${t().pdfTitle}</b><br><a href="${PDFS[loc].de}" target="_blank">🇩🇪 Deutsch</a><a href="${PDFS[loc].en}" target="_blank">🇬🇧 English</a><a href="${PDFS[loc].pl}" target="_blank">🇵🇱 Polski</a></div>`;
+   if(PDFS[loc]) h+=`<div class="pdfs" style="margin-top:14px"><b style="font-size:13.5px">${t().pdfTitle}</b><br><a href="${PDFS[loc].de}" target="_blank">🇩🇪 Deutsch</a><a href="${PDFS[loc].en}" target="_blank">🇬🇧 English</a><a href="${PDFS[loc].pl}" target="_blank">🇵🇱 Polski</a></div>`;
  } else {
    h+=`<div class="videobox"><h3>${t().videoTitle}</h3><p>${t().videoText}</p><a class="btn" style="font-size:15px;padding:12px 22px" href="${VIDEOS}" target="_blank">${t().videoBtn} ↗</a></div>`;
    h+=`<ul class="rules">`+t().rezRules.map(r=>`<li>${r}</li>`).join("")+`</ul>`;
  }
  h+=`</div>`;
+ // --- Tools ---
+ const tools=[];
+ if(TOOLS[loc].hk) tools.push([t().toolHk, t().toolHkDesc, TOOLS[loc].hk]);
+ if(pos==="rez" && TOOLS[loc].invoice) tools.push([t().toolInvoice, t().toolInvoiceDesc, TOOLS[loc].invoice]);
+ if(tools.length){
+   h+=`<div class="sopbox"><h2 style="margin-top:0">${t().toolsTitle}</h2>`;
+   tools.forEach(x=>{h+=`<div style="display:flex;justify-content:space-between;align-items:center;gap:14px;border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0"><div><b>${x[0]}</b><p style="font-size:13.5px;color:var(--muted);margin-top:2px">${x[1]}</p></div><a class="btn" style="font-size:14px;padding:10px 16px;white-space:nowrap" href="${x[2]}" target="_blank">${t().toolOpen}</a></div>`;});
+   h+=`</div>`;
+ }
+ // --- Verpflegung (nur prize) ---
+ if(loc==="prize"){
+   h+=`<div class="sopbox" style="border-top:4px solid #2e9e63"><h2 style="margin-top:0">${t().foodTitle}</h2><ul class="rules">`+t().foodItems.map(x=>`<li>${x}</li>`).join("")+`</ul></div>`;
+ }
+ // --- Ansprechpartner ---
+ const roleLbl={hk:t().contactHk, rez:t().contactRez, emergency:t().contactEmergency};
+ h+=`<div class="sopbox" style="border-top:4px solid var(--red)"><h2 style="margin-top:0">${t().contactsTitle}</h2><p class="hint">${t().contactIntro}</p><div class="selgrid" style="margin:10px 0 4px">`;
+ CONTACTS[loc].forEach(x=>{h+=`<div class="sel" style="cursor:default;text-align:left"><div class="ico">${x[0]}</div><p style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--red-deep);font-weight:700">${roleLbl[x[1]]}</p><h3 style="margin-top:3px">${x[2]}</h3></div>`;});
+ h+=`</div></div>`;
  document.getElementById("sopContent").innerHTML=h;
  document.getElementById("next3").disabled=true;
  setTimeout(()=>{ // Seite kürzer als Viewport -> direkt freischalten
