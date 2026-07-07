@@ -75,8 +75,19 @@ label.chk input{width:20px;height:20px;margin-top:2px;flex-shrink:0}
 <div class="wrap">
 <div class="progress"><div id="p1"></div><div id="p2"></div><div id="p3"></div><div id="p4"></div></div>
 
+<!-- STEP 0: Sprache -->
+<div class="step on" id="s0">
+  <h1 style="text-align:center;margin-top:30px">🌍</h1>
+  <h1 style="text-align:center">Sprache wählen<br><span style="font-size:20px;color:#6b7681;font-weight:600">Choose your language · Wybierz język</span></h1>
+  <div class="selgrid" style="max-width:640px;margin:34px auto">
+    <div class="sel" onclick="chooseLang('de')"><div class="ico">🇩🇪</div><h3>Deutsch</h3><p>Weiter auf Deutsch</p></div>
+    <div class="sel" onclick="chooseLang('en')"><div class="ico">🇬🇧</div><h3>English</h3><p>Continue in English</p></div>
+    <div class="sel" onclick="chooseLang('pl')"><div class="ico">🇵🇱</div><h3>Polski</h3><p>Kontynuuj po polsku</p></div>
+  </div>
+</div>
+
 <!-- STEP 1: Unternehmen -->
-<div class="step on" id="s1">
+<div class="step" id="s1">
   <h1 data-i="welcomeTitle"></h1>
   <p class="lead" data-i="welcomeLead"></p>
   <div class="cards" id="valuecards"></div>
@@ -306,7 +317,8 @@ function finish(){const n=document.getElementById("name").value.trim();
  document.getElementById("mailBtn").href=`mailto:kaito.weingart@amanthos.com?subject=${encodeURIComponent(t().mailSubj+" – "+n)}&body=${body}`;
  document.querySelectorAll(".step").forEach(s=>s.classList.remove("on"));document.getElementById("s5").classList.add("on");
  for(let i=1;i<=4;i++)document.getElementById("p"+i).classList.add("done");window.scrollTo({top:0});}
-setLang("de");
+function chooseLang(l){setLang(l);go(1);}
+renderStatic();
 </script>
 </body>
 </html>
