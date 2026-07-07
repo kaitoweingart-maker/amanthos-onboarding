@@ -302,10 +302,10 @@ const TOOLS = {
  mulin:  {hk:null, invoice:null},
  living: {hk:null, invoice:null}};
 const CONTACTS = {
- prize:  [["🧹","hk","Agata Machelska"],["🛎️","rez","Zuzanna Cwynar"],["🚨","emergency","Kaito Weingart"]],
- chalet: [["🧹","hk","Isa Pimenta"],["🛎️","rez","Kamila Ceglarz"],["🚨","emergency","Kaito Weingart"]],
- mulin:  [["🧹","hk","Agata Machelska"],["🛎️","rez","Samia Rodrigues"],["🚨","emergency","Kaito Weingart"]],
- living: [["🧹","hk","Agata Machelska"],["🛎️","rez","Samia Rodrigues"],["🚨","emergency","Kaito Weingart"]]};
+ prize:  [["🧹","hk","Agata Machelska","+33 7 52 66 24 92"],["🛎️","rez","Zuzanna Cwynar","+1 516 738 39 35"],["🚨","emergency","Kaito Weingart","+41 79 252 25 70"]],
+ chalet: [["🧹","hk","Isa Pimenta","+41 78 758 08 98"],["🛎️","rez","Kamila Ceglarz","+48 537 128 847"],["🚨","emergency","Kaito Weingart","+41 79 252 25 70"]],
+ mulin:  [["🧹","hk","Agata Machelska","+33 7 52 66 24 92"],["🛎️","rez","Samia Rodrigues","+33 6 34 50 04 86"],["🚨","emergency","Kaito Weingart","+41 79 252 25 70"]],
+ living: [["🧹","hk","Agata Machelska","+33 7 52 66 24 92"],["🛎️","rez","Samia Rodrigues","+33 6 34 50 04 86"],["🚨","emergency","Kaito Weingart","+41 79 252 25 70"]]};
 const SOPTIMES = {
  prize: [["25","dep0",""],["15","res","red"]],
  mulin: [["30","dep1",""],["40","dep2",""],["15","dep3",""],["15","res","red"]],
@@ -395,7 +395,7 @@ function renderSop(){
  // --- Ansprechpartner ---
  const roleLbl={hk:t().contactHk, rez:t().contactRez, emergency:t().contactEmergency};
  h+=`<div class="sopbox" style="border-top:4px solid var(--red)"><h2 style="margin-top:0">${t().contactsTitle}</h2><p class="hint">${t().contactIntro}</p><div class="selgrid" style="margin:10px 0 4px">`;
- CONTACTS[loc].forEach(x=>{h+=`<div class="sel" style="cursor:default;text-align:left"><div class="ico">${x[0]}</div><p style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--red-deep);font-weight:700">${roleLbl[x[1]]}</p><h3 style="margin-top:3px">${x[2]}</h3></div>`;});
+ CONTACTS[loc].forEach(x=>{const tel=x[3]?`<a href="tel:${x[3].replace(/\s/g,"")}" style="display:inline-block;margin-top:6px;font-size:14.5px;font-weight:700;color:var(--red-deep);text-decoration:none">📞 ${x[3]}</a>`:"";h+=`<div class="sel" style="cursor:default;text-align:left"><div class="ico">${x[0]}</div><p style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--red-deep);font-weight:700">${roleLbl[x[1]]}</p><h3 style="margin-top:3px">${x[2]}</h3>${tel}</div>`;});
  h+=`</div></div>`;
  document.getElementById("sopContent").innerHTML=h;
  document.getElementById("next3").disabled=true;
