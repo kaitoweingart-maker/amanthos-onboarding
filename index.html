@@ -92,7 +92,7 @@ label.chk input{width:20px;height:20px;margin-top:2px;flex-shrink:0}
   <p class="lead" data-i="welcomeLead"></p>
   <div class="cards" id="valuecards"></div>
   <p class="hint" data-i="cardsHint"></p>
-  <div class="nav"><span></span><button class="btn" id="next1" onclick="go(2)" data-i="next"></button></div>
+  <div class="nav"><span></span><button class="btn" id="next1" disabled onclick="go(2)" data-i="next"></button></div>
 </div>
 
 <!-- STEP 2: Standort & Position -->
@@ -110,7 +110,7 @@ label.chk input{width:20px;height:20px;margin-top:2px;flex-shrink:0}
   <h1 data-i="sopTitle"></h1>
   <p class="lead" id="sopIntro"></p>
   <div id="sopContent"></div>
-  <div class="nav"><button class="btn ghost" onclick="go(2)" data-i="back"></button><button class="btn" onclick="go(4)" data-i="sopRead"></button></div>
+  <div class="nav"><button class="btn ghost" onclick="go(2)" data-i="back"></button><button class="btn" id="next3" disabled onclick="go(4)" data-i="sopRead"></button></div>
 </div>
 
 <!-- STEP 4: Commitment -->
@@ -278,7 +278,8 @@ function renderStatic(){
  const vc=document.getElementById("valuecards");vc.innerHTML="";
  t().values.forEach((v,i)=>{const d=document.createElement("div");d.className="vcard"+(opened.has(i)?" open":"");
   d.innerHTML=`<div style="font-size:26px;margin-bottom:6px">${v[0]}</div><h3>${v[1]}</h3><p>${v[2]}</p><div class="more">▾</div>`;
-  d.onclick=()=>{opened.add(i);d.classList.add("open");};vc.appendChild(d);});
+  d.onclick=()=>{opened.add(i);d.classList.add("open");check1();};vc.appendChild(d);});
+ check1();
  const lg=document.getElementById("locgrid");lg.innerHTML="";
  t().locations.forEach((l,i)=>{const d=document.createElement("div");d.className="sel"+(loc===LOCS[i]?" on":"");
   d.innerHTML=`<div class="ico">${l[0]}</div><h3>${l[1]}</h3><p>${l[2]}</p>`;
@@ -288,7 +289,20 @@ function renderStatic(){
   d.innerHTML=`<div class="ico">${p[0]}</div><h3>${p[1]}</h3><p>${p[2]}</p>`;
   d.onclick=()=>{pos=key;renderStatic();check2();};pg.appendChild(d);});
 }
+function check1(){
+ const total=t().values.length;
+ document.getElementById("next1").disabled=opened.size<total;
+ const h=document.querySelector('#s1 .hint');
+ if(h)h.innerHTML=t().cardsHint+" <b>("+opened.size+"/"+total+")</b>";
+}
 function check2(){document.getElementById("next2").disabled=!(loc&&pos);}
+// SOP: erst freischalten, wenn bis zum Ende gescrollt wurde
+function checkSopScroll(){
+ if(!document.getElementById("s3").classList.contains("on"))return;
+ const nearBottom=(window.innerHeight+window.scrollY)>=(document.body.scrollHeight-60);
+ if(nearBottom)document.getElementById("next3").disabled=false;
+}
+window.addEventListener("scroll",checkSopScroll);
 function go(n){document.querySelectorAll(".step").forEach(s=>s.classList.remove("on"));document.getElementById("s"+n).classList.add("on");
  for(let i=1;i<=4;i++)document.getElementById("p"+i).classList.toggle("done",i<=Math.min(n,4));window.scrollTo({top:0,behavior:"smooth"});}
 function locName(){return t().locations[LOCS.indexOf(loc)][1]+" – "+t().locations[LOCS.indexOf(loc)][2];}
@@ -308,6 +322,11 @@ function renderSop(){
  }
  h+=`</div>`;
  document.getElementById("sopContent").innerHTML=h;
+ document.getElementById("next3").disabled=true;
+ setTimeout(()=>{ // Seite kürzer als Viewport -> direkt freischalten
+   if(document.body.scrollHeight<=window.innerHeight+80)document.getElementById("next3").disabled=false;
+   checkSopScroll();
+ },300);
 }
 function checkCommit(){const ok=document.getElementById("name").value.trim().length>2&&document.getElementById("agree1").checked&&document.getElementById("agree2").checked;
  document.getElementById("commitBtn").disabled=!ok;}
