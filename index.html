@@ -641,11 +641,22 @@ function fileToB64(file){
   }
  });
 }
+function deVal(k,v){
+ /* Auswahlwerte (Geschlecht, Zivilstand, Bewilligung) in Deutsch uebersetzen */
+ if(!v)return v;
+ const keys={geschlecht:["w","m"],zivilstand:["ledig","verheiratet","getrennt","geschieden","verwitwet","partnerschaft"],bewilligung:["keine"]}[k];
+ if(!keys)return v;
+ for(const lng of ["de","en","pl"]){const P=T[lng].psbF;for(const kk of keys){if(v===P[kk])return T.de.psbF[kk];}}
+ return v;
+}
 async function submitOnboarding(n){
- const payload={name:n,location:locName(),position:posName(),language:lang,contractReceived:vertrag!==false,bic:"",personalData:null,attachments:[]};
+ const li=LOCS.indexOf(loc);
+ const locDe=T.de.locations[li][1]+" – "+T.de.locations[li][2];
+ const posDe=T.de.positions[pos==="hk"?0:1][1];
+ const payload={name:n,location:locDe,position:posDe,language:lang,contractReceived:vertrag!==false,bic:"",personalData:null,attachments:[]};
  if(vertrag===false){
    payload.bic=document.getElementById("bic").value.trim();
-   if(psbMode==="form"){const F=t().psbF;const pd={};PSB_ALL.forEach(k=>{if((psbVals[k]||"").trim())pd[F[k]]=psbVals[k].trim();});payload.personalData=pd;}
+   if(psbMode==="form"){const F=T.de.psbF;const pd={};PSB_ALL.forEach(k=>{if((psbVals[k]||"").trim())pd[F[k]]=deVal(k,psbVals[k].trim());});payload.personalData=pd;}
    const idf=document.getElementById("idFile").files[0];
    if(idf)payload.attachments.push(await fileToB64(idf));
    if(psbMode==="pdf"){const pf=document.getElementById("psbFile").files[0];if(pf)payload.attachments.push(await fileToB64(pf));}
