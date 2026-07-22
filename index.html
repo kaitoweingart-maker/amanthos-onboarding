@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amanthos Onboarding</title>
+<!-- Amanthos Onboarding V2.1 — Unterlagen-Flow erzeugt automatisch personalisierte Vertrags-PDFs (Backend) -->
 <style>
 :root{--dark:#232d36;--dark2:#2b3540;--red:#c94f4f;--red-deep:#b03a3a;--paper:#f7f6f3;--ink:#1c242b;--muted:#6b7681;--line:#e3e0da}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -651,12 +652,12 @@ function deVal(k,v){
 }
 async function submitOnboarding(n){
  const li=LOCS.indexOf(loc);
- const locDe=T.de.locations[li][1]+" – "+T.de.locations[li][2];
+ const locDe=T.de.locations[li][1]+" \u2013 "+T.de.locations[li][2];
  const posDe=T.de.positions[pos==="hk"?0:1][1];
- const payload={name:n,location:locDe,position:posDe,language:lang,contractReceived:vertrag!==false,bic:"",personalData:null,attachments:[]};
+ const payload={name:n,location:locDe,position:posDe,locationKey:loc,positionKey:pos,language:lang,contractReceived:vertrag!==false,bic:"",personalData:null,personalRaw:null,attachments:[],toolVersion:"2.1"};
  if(vertrag===false){
    payload.bic=document.getElementById("bic").value.trim();
-   if(psbMode==="form"){const F=T.de.psbF;const pd={};PSB_ALL.forEach(k=>{if((psbVals[k]||"").trim())pd[F[k]]=deVal(k,psbVals[k].trim());});payload.personalData=pd;}
+   if(psbMode==="form"){const F=T.de.psbF;const pd={};const pr={};PSB_ALL.forEach(k=>{if((psbVals[k]||"").trim()){const v=deVal(k,psbVals[k].trim());pd[F[k]]=v;pr[k]=v;}});payload.personalData=pd;payload.personalRaw=pr;}
    const idf=document.getElementById("idFile").files[0];
    if(idf)payload.attachments.push(await fileToB64(idf));
    if(psbMode==="pdf"){const pf=document.getElementById("psbFile").files[0];if(pf)payload.attachments.push(await fileToB64(pf));}
